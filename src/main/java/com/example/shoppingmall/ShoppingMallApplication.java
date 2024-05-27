@@ -2,6 +2,7 @@ package com.example.shoppingmall;
 
 import com.example.shoppingmall.entity.User;
 import com.example.shoppingmall.repository.UserRepository;
+import com.example.shoppingmall.security.UserRoleEnum;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +22,7 @@ public class ShoppingMallApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userRepository.save(new User(1L, "dqw", "qdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
+        userRepository.save(new User(1L, UserRoleEnum.USER, "aaa", "aaa", "aaa", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
 
     }
 }

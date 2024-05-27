@@ -1,5 +1,6 @@
 package com.example.shoppingmall.entity;
 
+import com.example.shoppingmall.security.UserRoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,8 +19,10 @@ public class User {
     @Column
     private Long id;
 
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private UserRoleEnum usertype;
 
-    private String usertype;
     private String userId;
     private String username;
     private String password;

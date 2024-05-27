@@ -1,10 +1,14 @@
 package com.example.shoppingmall.controller;
 
+import com.example.shoppingmall.dto.LoginDAO;
 import com.example.shoppingmall.dto.SignUpDAO;
 import com.example.shoppingmall.entity.User;
 import com.example.shoppingmall.repository.UserRepository;
+import com.example.shoppingmall.security.UserDetailsImpl;
 import com.example.shoppingmall.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -93,6 +97,25 @@ public class UserController {
 
         // 수정 후에는 보통 상세 페이지로 리다이렉트하거나, 수정된 내용을 보여주는 페이지로 이동합니다.
         return "redirect:/users"; // 수정된 회원 정보를 보여주는 페이지로 리다이렉트
+    }
+
+    /*로그인 뷰*/
+    @GetMapping("/login")
+    public String login(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        /*이미 로그인된 사용자일 경우 인덱스 페이지로 강제이동.*/
+        if (userDetails != null) {
+            return "redirect:/";
+        }
+
+        return "login";
+    }
+
+    /*로그인 API*/
+    @PostMapping("/api/login")
+    public String login(LoginDAO requestDto, HttpServletResponse response) {
+        userService.login(requestDto, response);
+        return "redirect:/";
     }
 
 
