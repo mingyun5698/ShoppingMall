@@ -22,7 +22,12 @@ public class ShoppingMallApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userRepository.save(new User(1L, UserRoleEnum.USER, "aaa", "aaa", "aaa", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
+        userRepository.save(new User(1L, UserRoleEnum.ADMIN, "ADMIN", "aaa", "ADMIN", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
+        userRepository.save(new User(2L, UserRoleEnum.USER, "USER", "bbb", "USER", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
+        userRepository.save(new User(3L, UserRoleEnum.USER, "ccc", "ccc", "ccc", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
+        userRepository.save(new User(4L, UserRoleEnum.USER, "ddd", "ddd", "ddd", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
+        userRepository.save(new User(5L, UserRoleEnum.USER, "eee", "eee", "eee", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
+
 
     }
 }
