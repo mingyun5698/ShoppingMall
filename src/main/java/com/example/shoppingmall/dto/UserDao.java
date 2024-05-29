@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class SignUpDAO {
+public class UserDao {
     private Long id;
     private String usertype;
     private String username;
