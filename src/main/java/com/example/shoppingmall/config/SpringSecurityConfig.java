@@ -3,7 +3,7 @@ package com.example.shoppingmall.config;
 
 import com.example.shoppingmall.jwt.JwtAuthFilter;
 import com.example.shoppingmall.jwt.JwtUtil;
-import com.example.shoppingmall.security.UserRoleEnum;
+import com.example.shoppingmall.security.MemberRoleEnum;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -55,9 +55,9 @@ public class SpringSecurityConfig {
         /* URL Mapping */
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/signup", "/api/login", "signup/**", "/api/users", "/**").permitAll()
-                        .requestMatchers("/mypage").authenticated() // 모든 로그인한 사용자에게 허용
-                       // .requestMatchers("/users").hasRole(UserRoleEnum.ADMIN.toString()) // ADMIN만 허용
+                        .requestMatchers("/login", "/signup", "signup/**", "api/login", "api/mypage").permitAll()
+                        //.requestMatchers("/api/hello").authenticated() // 모든 로그인한 사용자에게 허용
+                        .requestMatchers("/api/hello").hasRole(MemberRoleEnum.USER.toString()) // ADMIN만 허용
                         .anyRequest().authenticated()
                 );
 
@@ -67,8 +67,8 @@ public class SpringSecurityConfig {
         /*로그인 페이지를 /login으로 설정한다.
         1. 인증이 되지 않은 사용자가 permitAll()페이지가 아닌 페이지에 접근할 때 /login으로 강제 이동 시킨다.
         2. 이때의 인증은 위에 필터에 등록해 놓은 JWT 토큰의 유무(유효성 검증) 기준이다.*/
-        http
-                .formLogin(login -> login.loginPage("/login"));
+//        http
+//                .formLogin(login -> login.loginPage("/login"));
 
         /*인가 (권한 인증) 실패 시 아래의 핸들러 작동 */
         http.

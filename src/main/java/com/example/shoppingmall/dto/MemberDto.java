@@ -10,11 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserDao {
+public class MemberDto {
     private Long id;
-    private String usertype;
-    private String username;
-    private String userId;
+    private String membertype;
+    private String membername;
+    private String memberId;
     private String password;
     private String birthdate;
     private String gender;

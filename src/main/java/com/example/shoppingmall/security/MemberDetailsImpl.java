@@ -1,5 +1,5 @@
 package com.example.shoppingmall.security;
-import com.example.shoppingmall.entity.User;
+import com.example.shoppingmall.entity.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,24 +9,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
-public class UserDetailsImpl implements UserDetails {
-    private final User user;
+public class MemberDetailsImpl implements UserDetails {
+    private final Member member
+            ;
     private final String password;
     private final String userId;
 
-    public UserDetailsImpl(User user, String password, String userId) {
-        this.user = user;
+    public MemberDetailsImpl(Member member, String password, String userId) {
+        this.member = member;
         this.password = password;
         this.userId = userId;
     }
 
-    public User getUser(){
-        return this.user;
+    public Member getMember(){
+        return this.member;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        UserRoleEnum usertype = user.getUsertype();
+        MemberRoleEnum usertype = member.getMembertype();
         String authority = usertype.getAuthority();
 
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);

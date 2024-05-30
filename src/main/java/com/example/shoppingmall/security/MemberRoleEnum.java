@@ -1,6 +1,6 @@
 package com.example.shoppingmall.security;
 
-public enum UserRoleEnum {
+public enum MemberRoleEnum {
 
     USER(Authority.USER),
     ADMIN(Authority.ADMIN);
@@ -8,7 +8,7 @@ public enum UserRoleEnum {
 
     private final String authority;
 
-    UserRoleEnum(String authority) {
+    MemberRoleEnum(String authority) {
         this.authority = authority;
     }
 
@@ -22,8 +22,8 @@ public enum UserRoleEnum {
 
     }
 
-    public static UserRoleEnum fromString(String usertype) {
-        switch (usertype) {
+    public static MemberRoleEnum fromString(String membertype) {
+        switch (membertype) {
             case "ROLE_USER":
                 return USER;
             case "ROLE_ADMIN":

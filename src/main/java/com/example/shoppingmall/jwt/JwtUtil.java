@@ -1,8 +1,8 @@
 package com.example.shoppingmall.jwt;
 
 
-import com.example.shoppingmall.security.UserRoleEnum;
-import com.example.shoppingmall.security.UserDetailsServiceImpl;
+import com.example.shoppingmall.security.MemberRoleEnum;
+import com.example.shoppingmall.security.MemberDetailsServiceImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -31,11 +31,11 @@ public class JwtUtil {
     private static final String BEARER_PREFIX = "Bearer=";
     private static final long TOKEN_TIME = 60 * 60 * 1000L;
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final MemberDetailsServiceImpl memberDetailsService;
 
-    public JwtUtil(UserDetailsServiceImpl userDetailsService) {
+    public JwtUtil(MemberDetailsServiceImpl memberDetailsService) {
         super();
-        this.userDetailsService = userDetailsService;
+        this.memberDetailsService = memberDetailsService;
     }
 
     @Value("${jwt.secret.key}")
@@ -75,13 +75,13 @@ public class JwtUtil {
     }
 
     // 토큰 생성
-    public String createToken(String userId, UserRoleEnum usertype) {
+    public String createToken(String memberId, MemberRoleEnum membertype) {
         Date date = new Date();
 
         return BEARER_PREFIX +
                 Jwts.builder()
-                        .setSubject(userId)
-                        .claim(AUTHORIZATION_KEY, usertype)
+                        .setSubject(memberId)
+                        .claim(AUTHORIZATION_KEY, membertype)
                         .setExpiration(new Date(date.getTime() + TOKEN_TIME))
                         .setIssuedAt(date)
                         .signWith(key, signatureAlgorithm)
@@ -111,9 +111,9 @@ public class JwtUtil {
     }
 
     // 인증 객체 생성
-    public Authentication createAuthentication(String userId) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
-        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+    public Authentication createAuthentication(String memberId) {
+        UserDetails memberDetails = memberDetailsService.loadUserByUsername(memberId);
+        return new UsernamePasswordAuthenticationToken(memberDetails, null, memberDetails.getAuthorities());
     }
 
 }
