@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -16,7 +18,7 @@ import lombok.Setter;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)
@@ -32,6 +34,9 @@ public class Member {
     private String contact;
     private String address;
 
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    private List<Board> boards;
 
 
 }

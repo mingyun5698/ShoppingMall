@@ -55,9 +55,9 @@ public class SpringSecurityConfig {
         /* URL Mapping */
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/signup", "signup/**", "api/login", "api/mypage").permitAll()
-                        //.requestMatchers("/api/hello").authenticated() // 모든 로그인한 사용자에게 허용
-                        .requestMatchers("/api/hello").hasRole(MemberRoleEnum.USER.toString()) // ADMIN만 허용
+                        .requestMatchers("api/login", "/api/mypage", "/api/signup", "/api/members/**", "/api/boards").permitAll()
+                        .requestMatchers("/api/mypage").authenticated() // 모든 로그인한 사용자에게 허용
+                        .requestMatchers("/api/adminButton").hasRole(MemberRoleEnum.ADMIN.toString()) // ADMIN만 허용
                         .anyRequest().authenticated()
                 );
 

@@ -22,11 +22,11 @@ public class ShoppingMallApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        memberRepository.save(new Member(1L, MemberRoleEnum.ADMIN, "ADMIN", "aaa", "ADMIN", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
-        memberRepository.save(new Member(2L, MemberRoleEnum.USER, "USER", "bbb", "USER", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
-        memberRepository.save(new Member(3L, MemberRoleEnum.USER, "ccc", "ccc", "ccc", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
-        memberRepository.save(new Member(4L, MemberRoleEnum.USER, "ddd", "ddd", "ddd", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
-        memberRepository.save(new Member(5L, MemberRoleEnum.USER, "eee", "eee", "eee", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw"));
+        memberRepository.save(new Member(1L, MemberRoleEnum.ADMIN, "ADMIN", "aaa", "ADMIN", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", null));
+        memberRepository.save(new Member(2L, MemberRoleEnum.USER, "USER", "bbb", "USER", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", null));
+        memberRepository.save(new Member(3L, MemberRoleEnum.USER, "ccc", "ccc", "ccc", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", null));
+        memberRepository.save(new Member(4L, MemberRoleEnum.USER, "ddd", "ddd", "ddd", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", null));
+        memberRepository.save(new Member(5L, MemberRoleEnum.USER, "eee", "eee", "eee", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", "dqwqdw", null));
 
 
     }

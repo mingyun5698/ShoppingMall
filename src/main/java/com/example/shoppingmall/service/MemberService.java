@@ -1,16 +1,20 @@
 package com.example.shoppingmall.service;
 
+import com.example.shoppingmall.dto.BoardDto;
 import com.example.shoppingmall.dto.LoginDto;
 import com.example.shoppingmall.dto.MemberDto;
+import com.example.shoppingmall.entity.Board;
 import com.example.shoppingmall.entity.Member;
 import com.example.shoppingmall.jwt.JwtUtil;
 import com.example.shoppingmall.repository.MemberRepository;
+import com.example.shoppingmall.security.MemberDetailsImpl;
 import com.example.shoppingmall.security.MemberRoleEnum;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,7 +51,7 @@ public class MemberService {
             throw new IllegalArgumentException("이미 존재하는 회원 이름입니다: " + memberId);
         }
 
-        Member member = new Member(id, membertype, memberId, membername, password, birthdate, gender, email, contact, address);
+        Member member = new Member(id, membertype, memberId, membername, password, birthdate, gender, email, contact, address, null);
         memberRepository.save(member);
 
         return member;
@@ -63,7 +67,7 @@ public class MemberService {
         return memberRepository.findById(id).orElse(null);
     }
 
-    // mypage 수정 완료
+    // mypage 수정 완료 안쓸듯
     public Member edit(MemberDto memberDto) {
         // MemberDTO를 Member 객체로 변환
         Member member = new Member();
@@ -110,10 +114,16 @@ public class MemberService {
             member.setAddress(memberDto.getAddress());
             member.setBirthdate(memberDto.getBirthdate());
             member.setContact(memberDto.getContact());
+            member.setEmail(memberDto.getEmail());
             member.setMembertype(MemberRoleEnum.valueOf(memberDto.getMembertype()));
             member.setGender(memberDto.getGender());
 
+
+
             memberRepository.save(member);
+
+
+
             return member;
         } else {
             return null;
@@ -157,5 +167,10 @@ public class MemberService {
 
         return token; // 토큰 반환
     }
+
+
+
+
+
 
 }
