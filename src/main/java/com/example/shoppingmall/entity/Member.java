@@ -1,6 +1,7 @@
 package com.example.shoppingmall.entity;
 
 import com.example.shoppingmall.security.MemberRoleEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class Member {
 
 
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"member"})
     private List<Board> boards;
 
 

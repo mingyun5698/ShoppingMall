@@ -14,7 +14,7 @@ import lombok.Setter;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id")
+    @Column(name = "boardId")
     private Long boardId;
 
     @Column(name = "title")
@@ -24,7 +24,7 @@ public class Board {
     private String content;
 
     // Member와의 관계 매핑
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id", referencedColumnName = "id") // 이 부분 수정
     private Member member;
 

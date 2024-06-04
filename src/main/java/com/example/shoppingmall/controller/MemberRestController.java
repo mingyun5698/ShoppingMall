@@ -139,6 +139,7 @@ public class MemberRestController {
         return ResponseEntity.ok("로그아웃이 성공적으로 완료되었습니다.");
     }
 
+    //관리자에게 텍스트 보내기
     @GetMapping("/adminButton")
     public ResponseEntity<String> adminButton() {
 
