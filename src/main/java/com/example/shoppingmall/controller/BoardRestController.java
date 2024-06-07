@@ -39,7 +39,7 @@ public class BoardRestController {
 
 
 
-    // 게시글 삭제
+    // 게시글 나열
     @GetMapping("/boards")
     public ResponseEntity<List<Board>> getAllBoards() {
             List<Board> boards = (List<Board>) boardRepository.findAll();
@@ -65,7 +65,42 @@ public class BoardRestController {
         }
     }
 
+    // 게시글 클릭시 제목 내용 가져오기
+    @GetMapping("/boards/{id}")
+    public ResponseEntity<?> getBoard(@PathVariable Long id) {
+        Optional<Board> boardOptional = boardRepository.findById(id);
+        if (boardOptional.isPresent()) {
+            Board board = boardOptional.get();
+                return ResponseEntity.ok(board);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
+    // 게시글 수정 버튼 누를시 권한이 있는사람만 input형태로 받을 수 있음
+    @GetMapping("/boards/edit/{id}")
+    public ResponseEntity<?> gettBoard(@PathVariable Long id, @AuthenticationPrincipal MemberDetailsImpl memberDetails) {
+        Optional<Board> boardOptional = boardRepository.findById(id);
+        if (boardOptional.isPresent()) {
+            Board board = boardOptional.get();
+            if(board.getMember().getId().equals(memberDetails.getMember().getId()) || memberDetails.getMember().getMembertype().equals(MemberRoleEnum.ADMIN)) {
+                return ResponseEntity.ok(board);
+            } else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("수정 권한이 없습니다.");
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    // 게시글 수정 완료
+    @PutMapping("/boards/{id}")
+    public ResponseEntity<Board> editBoard(@PathVariable Long id, @RequestBody BoardDto boardDto) {
+            Board board = boardService.editBoard(id, boardDto);
+            return ResponseEntity.ok(board);
+
+    }
 
 
 

@@ -127,17 +127,6 @@ public class MemberRestController {
 
     }
 
-    /*로그아웃 API*/
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout(@CookieValue(value = "Authorization", defaultValue = "", required = false) Cookie jwtCookie,
-                                         HttpServletResponse response) {
-        jwtCookie.setValue(null);
-        jwtCookie.setMaxAge(0);
-        jwtCookie.setPath("/");
-        response.addCookie(jwtCookie);
-
-        return ResponseEntity.ok("로그아웃이 성공적으로 완료되었습니다.");
-    }
 
     //관리자에게 텍스트 보내기
     @GetMapping("/adminButton")

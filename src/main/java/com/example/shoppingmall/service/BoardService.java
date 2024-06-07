@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 @AllArgsConstructor
@@ -33,6 +35,20 @@ public class BoardService {
 
     public void deleteBoard(Long id) {
         boardRepository.deleteById(id);
+    }
+
+    public Board editBoard(Long id, BoardDto boardDto) {
+        Board board = boardRepository.findById(id).orElse(null);
+        if (board != null) {
+            board.setContent(boardDto.getContent());
+            board.setTitle(boardDto.getTitle());
+            boardRepository.save(board);
+        } else {
+            // Handle the case where the board is not found
+            // Maybe throw an exception or return null
+        }
+
+        return board;
     }
 
 
